@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+<!--title on tab browser-->
+{% block title %} Ajouter Marque{% endblock title %}
+
+
+<!-- navbar content -->
+{% block navbar-content %}
+<!--<i class="text-warning"></i> &nbsp;&nbsp; Ajouter client-->
+
+
+<div class="container-fluid">
+      
+  <span class="navbar-toggler-icon"></span>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'home'%}">Client</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_produit'%}">Produit</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home_marque'%}">Marque</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_commande'%}">Commande</a>
+    </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_ligneCommande'%}">Ligne commande</a>
+    </li>
+    
+  </ul>
+  
+</div>
+</div>
+
+
+{% endblock navbar-content %}
+
+<!-- page content -->
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-body mt-5 {% block card-color %} border-dark text-light bg-secondary {% endblock card-color %}">
+                <span class="text-center">
+                    {% block card-title %} Entrer les données de la marque  {% endblock card-title %}
+                </span>
+            </div>
+            <form {% block action %} action="/add_marque" {% endblock action %} method="POST" enctype="multipart/form-data" autocomplete="off" class="card p-3 border-dark mt-3">
+                {% csrf_token %}
+                <!-- block id (denied here)-->
+                {% block value-id %} {% endblock value-id %}
+
+                <div class="input-group mb-3">
+                    <span class="side-label btn border-secondary bg-light"><i > </i></span>
+                    <input type="text" class="form-control" name="designation" maxlength="40" placeholder="designation "required {% block value-designation %} {% endblock value-designation %}>
+                </div>
+
+            
+
+                <div class="mt-4" style="width: 100%;">
+                    <button type="submit" class="btn btn-secondary mb-3">
+                        {% block btn-action %}  <i class="fas fa-plus"></i>&nbsp;&nbsp; Ajouter marque {% endblock btn-action %}
+
+                    </button>
+                    <a href="{% url 'home_marque' %}" class="btn btn-outline-dark mb-3 ms-2" style="width: 50px;" title="Back">
+                    <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <button type="reset" class="btn btn-outline-dark mb-3 ms-2" style="width: 50px;" title="Reset">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+</div><!--end container-->
+
+
+{% endblock content %}

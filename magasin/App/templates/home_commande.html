@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+<!-- navbar content -->
+{% block navbar-content %}
+<!--<i class="text-warning"></i>  Liste des commandes-->
+
+
+
+<div class="container-fluid">
+      
+  <span class="navbar-toggler-icon"></span>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home'%}">Client</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_produit'%}">Produit</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home_marque'%}">Marque</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_marque'%}">Commande</a>
+    </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_ligneCommande'%}">Ligne commande</a>
+    </li>
+    
+  </ul>
+  
+</div>
+</div>
+
+
+
+
+
+
+{% endblock navbar-content %}
+
+<!-- page content -->
+
+{% block content %}
+
+<div class="container">
+    <br><br>
+    <a href="{% url 'add_commande'%}" class="btn btn-outline-secondary btn-sm"> <i class="fas fa-plus"></i> &nbsp;&nbsp; Ajouter commande</a>
+
+    <table class="table table-bordered table-sm mt-4" style="text-align: center; font-size: 14px;">
+        <thead class="table-warning">
+            <tr>
+                <th style="width:25%;">Date</th>
+                <th style="width:25%;">Montant</th>
+                <th style="width:25%;">client</th>
+            </tr>
+        </thead>
+        <!-- Back-end -->
+        {% for commande in commandes%}
+        <tr>
+            <td>{{commande.dateC}}</td>
+            <td>{{commande.montant}}</td>
+            <td>{{commande.client}}</td>
+            <td>
+                <a href="/commande/{{ commande.id_commande }}" class="btn btn-warning" title="Editer commande">
+                    <i class="fas fa-pen"></i>
+                </a>
+            </td>
+            <td>
+                <a href="/delete_commande/{{ commande.id_commande }}" class="btn btn-secondary" title="supprimer commande">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+       
+        {% endfor %}
+    </table>
+
+
+</div> <!--end container -->
+ {% endblock content %}

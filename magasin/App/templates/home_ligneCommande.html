@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+<!-- navbar content -->
+{% block navbar-content %}
+<!--<i class="text-warning"></i>  Liste des clients-->
+
+
+
+<div class="container-fluid">
+      
+  <span class="navbar-toggler-icon"></span>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home'%}">Client</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_produit'%}">Produit</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home_marque'%}">Marque</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_commande'%}">Commande</a>
+    </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_ligneCommande'%}">Ligne commande</a>
+    </li>
+    
+  </ul>
+  
+</div>
+</div>
+
+
+
+
+
+
+{% endblock navbar-content %}
+
+<!-- page content -->
+
+{% block content %}
+
+<div class="container">
+    <br><br>
+  
+    <a href="{% url 'add_ligneCommande'%}" class="btn btn-outline-secondary btn-sm"> <i class="fas fa-plus"></i> &nbsp;&nbsp; Ajouter produit(s)</a>
+
+    <table class="table table-bordered table-sm mt-4" style="text-align: center; font-size: 14px;">
+        <thead class="table-warning">
+            <tr>
+                <th style="width:25%;">Commande</th>
+                <th style="width:25%;">Produit</th>
+                <th style="width:25%;">Date</th>
+                <th style="width:25%;">Prix</th>
+            </tr>
+        </thead>
+        <!-- Back-end -->
+        {% for ligneCommande in ligneCommande %}
+        <tr>
+            <td>{{ligneCommande.commande}}</td>
+            <td>{{lignecommande.produit}}</td>
+            <td>{{lignecommande.date}}</td>
+            <td>{{lignecommande.prix}}</td>
+            <td>
+                <a href="/ligneCommande/{{ ligneCommande.id_ligneCommande }}" class="btn btn-warning" title="Editer ligne commande">
+                    <i class="fas fa-pen"></i>
+                </a>
+            </td>
+            <td>
+                <a href="/delete_lignecommande/{{ ligneCommande.id_ligneCommande  }}" class="btn btn-secondary" title="supprimer ligneCommande">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+       
+        {% endfor %}
+    </table>
+
+
+</div> <!--end container -->
+ {% endblock content %}

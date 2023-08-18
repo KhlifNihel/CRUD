@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+<!-- navbar content -->
+{% block navbar-content %}
+<!--<i class="text-warning"></i>  Liste des clients-->
+
+
+
+<div class="container-fluid">
+      
+  <span class="navbar-toggler-icon"></span>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home'%}">Client</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_produit'%}">Produit</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home_marque'%}">Marque</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_commande'%}">Commande</a>
+    </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_ligneCommande'%}">Ligne commande</a>
+    </li>
+    
+  </ul>
+  
+</div>
+</div>
+
+
+
+
+
+
+{% endblock navbar-content %}
+
+<!-- page content -->
+
+{% block content %}
+
+<div class="container">
+    <br><br>
+    <a href="{% url 'add_client'%}" class="btn btn-outline-secondary btn-sm"> <i class="fas fa-plus"></i> &nbsp;&nbsp; Ajouter client</a>
+
+    <table class="table table-bordered table-sm mt-4" style="text-align: center; font-size: 14px;">
+        <thead class="table-warning">
+            <tr>
+                <th style="width:25%;">Nom</th>
+                <th style="width:25%;">adresse</th>
+                <th style="width:25%;">telephone</th>
+            </tr>
+        </thead>
+        <!-- Back-end -->
+        {% for client in clients %}
+        <tr>
+            <td>{{client.nom}}</td>
+            <td>{{client.adresse}}</td>
+            <td>{{client.telephone}}</td>
+            <td>
+                <a href="/client/{{ client.id }}" class="btn btn-warning" title="Editer client">
+                    <i class="fas fa-pen"></i>
+                </a>
+            </td>
+            <td>
+                <a href="/delete_client/{{ client.id }}" class="btn btn-secondary" title="supprimer client">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+       
+        {% endfor %}
+    </table>
+
+
+</div> <!--end container -->
+ {% endblock content %}

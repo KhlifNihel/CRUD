@@ -1,0 +1,82 @@
+{% extends 'add_commande.html' %}
+<!--title on tab browser-->
+{% block title %} Editer commande {% endblock title %}
+
+
+<!-- navbar content -->
+{% block navbar-content %}
+<!--<i class="text-warning"></i> &nbsp;&nbsp; Editer clients-->
+
+<div class="container-fluid">
+      
+  <span class="navbar-toggler-icon"></span>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home'%}">Client</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_produit'%}">Produit</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home_marque'%}">Marque</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_commande'%}">Commande</a>
+    </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_ligneCommande'%}">Ligne commande</a>
+    </li>
+    
+  </ul>
+  
+</div>
+</div>
+
+
+{% endblock navbar-content %}
+<!-- Block card color and title -->
+{% block card-color %} border-dark bg-warning{% endblock card-color %}
+
+
+{% block card-title %}  <strong> registré le : {% now "D/M/Y" %}<span></span></strong> {% endblock card-title %}
+
+<!--form action -->
+{% block action %} action="/edit_commande" {% endblock action %}
+
+<!--button action -->
+{% block btn-action %} <i class="fas fa-server "></i>&nbsp;&nbsp; Sauvegarder {% endblock btn-action %} 
+
+<!--======================================================================= Inputs ===============================================-->
+{% block value-id %}
+<div class="input-group mb-3">
+    <span class="side-label btn border-secondary bg-light"><i class="fas fa-key"> </i></span>
+    <input type="text" class="form-control" name="id_commande" value="{{commande.id_commande}}" readonly >
+</div>
+
+{% endblock value-id %}
+
+
+{% block value-dateC %} value= {{commande.dateC}}{% endblock value-dateC %}
+{% block value-montant %} {{ commande.montant}} {% endblock value-montant %}
+
+{% block value-client %}
+
+<div class="input-group mb-3">
+  <span class="side-label btn border-secondary bg-light"><i class="fas fa-commande"> </i></span>
+  <select class="form-select" id="clientC" name="client_select" required >
+      {% for clientId,clientNom in clients %}
+      <option name="option_client" value="{{clientId}}">{{clientNom}}</option>
+      {% endfor %}
+  </select>
+
+{% endblock value-client %}
+
+
+
+
+
+
+

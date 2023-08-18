@@ -1,0 +1,78 @@
+{% extends 'add_produit.html' %}
+<!--title on tab browser-->
+{% block title %} Editer produit {% endblock title %}
+
+
+<!-- navbar content -->
+{% block navbar-content %}
+<!--<i class="text-warning"></i> &nbsp;&nbsp; Editer produit-->
+
+<div class="container-fluid">
+      
+  <span class="navbar-toggler-icon"></span>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home'%}">Client</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_produit'%}">Produit</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link "  href="{% url 'home_marque'%}">Marque</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_commande'%}">Commande</a>
+    </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home_ligneCommande'%}">Ligne commande</a>
+    </li>
+    
+  </ul>
+  
+</div>
+</div>
+
+
+{% endblock navbar-content %}
+<!-- Block card color and title -->
+{% block card-color %} border-dark bg-warning{% endblock card-color %}
+
+
+{% block card-title %}  <strong> registré le : {% now "D/M/Y" %}<span></span></strong> {% endblock card-title %}
+
+<!--form action -->
+{% block action %} action="/edit_produit" {% endblock action %}
+
+<!--button action -->
+{% block btn-action %} <i class="fas fa-server "></i>&nbsp;&nbsp; Sauvegarder {% endblock btn-action %} 
+
+<!--=========================== Inputs =========================-->
+{% block value-id %}
+<div class="input-group mb-3">
+    <span class="side-label btn border-secondary bg-light"><i class="fas fa-key"> </i></span>
+    <input type="text" class="form-control" name="id_produit" value="{{produit.id_produit}}" readonly >
+</div>
+
+{% endblock value-id %}
+
+{% block value-designation %} value= {{produit.designation}}{% endblock value-designation %}
+
+{% block value-prix %} {{ produit.prix}} {% endblock value-prix %}
+
+{% block option %}
+    {% for marqueId, marqueDesignation in marques %}
+        {% if marqueId == produit.marque.id_marque %}
+            <option name="option_marque" value="{{ marqueId }}" style="background-color: #d3d3d3; color: #111;" selected>{{ marqueDesignation }}</option>
+        {% else %}
+            <option name="option_marque" value="{{ marqueId }}">{{ marqueDesignation }}</option>
+        {% endif %}
+    {% endfor %}
+{% endblock option %}
+
+
+
+
+
